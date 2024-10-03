@@ -25,7 +25,7 @@ public class Score {
         id.setUser(user);
     }
 
-    public ScorePK getId() {
+    public ScorePK scorePK() {
         return id;
     }
 
