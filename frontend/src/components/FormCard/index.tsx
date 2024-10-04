@@ -27,7 +27,21 @@ function FormCard({ movieId }: Props) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Aqui você pode adicionar o código para lidar com o submit
+        // Aqui você pode adicionar o código para lidar com o submit (ex: salvar avaliação)
+        const email = (event.target as any).email.value;
+        const score = (event.target as any).score.value;
+
+        // Exemplo de requisição POST
+        axios.post(`${BASE_URL}/reviews`, {
+            movieId: movieId,
+            email: email,
+            score: score
+        }).then(() => {
+            alert("Avaliação salva com sucesso!");
+            navigate("/"); // Redirecionar após salvar
+        }).catch(error => {
+            console.error("Error saving review:", error);
+        });
     }
 
     return (
@@ -44,7 +58,7 @@ function FormCard({ movieId }: Props) {
                             </div>
                             <div className="form-group dsmovie-form-group">
                                 <label htmlFor="score">Informe sua avaliação</label>
-                                <select className="form-control" id="score">
+                                <select className="form-control" id="score" required>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
