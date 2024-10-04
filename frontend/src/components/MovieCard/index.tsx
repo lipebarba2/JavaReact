@@ -1,16 +1,25 @@
+import axios from "axios";
 import MovieScore from "components/MovieScore"
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Movie, MoviePage } from "types/movie";
+import { BASE_URL } from "utils/requests";
 
+type Props = {
+    movie: Movie;
+}
 
-function MovieCard() {
+function MovieCard( { movie } : Props) {
+    const [pageNumber, setPageNumber] = useState(0)
 
-    const movie = {
-        id: 1,
-        image: "https://www.themoviedb.org/t/p/w533_and_h300_bestv2/jBJWaqoSCiARWtfV0GlqHrcdidd.jpg",
-        title: "The Witcher",
-        count: 2,
-        score: 4.5
-    };
+    useEffect(() => {
+        axios.get(`${BASE_URL}/movies?size=12&page=0`)
+        .then(response => {
+            const data = response.data as MoviePage
+            console.log(data)
+            setPageNumber(data.number)
+        })
+    }, [])
 
 
     return(
