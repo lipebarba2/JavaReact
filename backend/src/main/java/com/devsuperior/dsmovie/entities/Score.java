@@ -1,6 +1,5 @@
 package com.devsuperior.dsmovie.entities;
 
-
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -14,10 +13,9 @@ public class Score {
     private Double value;
 
     public Score() {
-
     }
 
-    public  void setMovie(Movie movie) {
+    public void setMovie(Movie movie) {
         id.setMovie(movie);
     }
 
@@ -25,7 +23,7 @@ public class Score {
         id.setUser(user);
     }
 
-    public ScorePK scorePK() {
+    public ScorePK getId() {
         return id;
     }
 

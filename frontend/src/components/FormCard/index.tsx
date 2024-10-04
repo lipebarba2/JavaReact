@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './styles.css'
 import { Movie } from 'types/movie';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { BASE_URL } from 'utils/requests';
 
 type Props = {
@@ -27,22 +27,36 @@ function FormCard({ movieId }: Props) {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        // Aqui você pode adicionar o código para lidar com o submit (ex: salvar avaliação)
+        
         const email = (event.target as any).email.value;
         const score = (event.target as any).score.value;
-
-        // Exemplo de requisição POST
-        axios.post(`${BASE_URL}/reviews`, {
-            movieId: movieId,
-            email: email,
-            score: score
-        }).then(() => {
-            alert("Avaliação salva com sucesso!");
-            navigate("/"); // Redirecionar após salvar
-        }).catch(error => {
-            console.error("Error saving review:", error);
-        });
+    
+        console.log("Email:", email, "Score:", score);  // Verifique se esses valores estão corretos
+        
+         
+        const config: AxiosRequestConfig = {
+            baseURL: BASE_URL,
+            method: 'PUT',
+            url: '/scores',
+            data: {
+                movieId: movieId,
+                email: email,
+                score: score
+            },
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+        
+        
+        axios(config)
+            .then(response => {
+            navigate("/") // Só navegar se o envio for bem-sucedido
+            })
+         
     }
+
+
 
     return (
         <div className="dsmovie-form-container">

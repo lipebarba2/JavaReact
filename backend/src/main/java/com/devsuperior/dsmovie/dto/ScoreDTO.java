@@ -4,7 +4,7 @@ public class ScoreDTO {
 
     private Long MovieId;
     private String email;
-    private  Double Score;
+    private  Double score;
 
     public ScoreDTO() {
 
@@ -27,10 +27,10 @@ public class ScoreDTO {
     }
 
     public Double getScore() {
-        return Score;
+        return score;
     }
 
     public void setScore(Double score) {
-        Score = score;
+        this.score = score;
     }
 }
