@@ -1,7 +1,7 @@
 package com.devsuperior.dsmovie.entities;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tb_user")
