@@ -4,4 +4,4 @@
   publish = "build" 
 
 [context.production.environment]
-  REACT_APP_BACKEND_URL = "https://dsmovie1-zl9phgxc.b4a.run/"
+  REACT_APP_BACKEND_URL = "https://dsmovie4-asgbuyvl.b4a.run/"
