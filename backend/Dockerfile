@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /dsmovie
 
 # Copie o arquivo JAR do projeto gerado pelo Maven/Gradle para o contêiner
-COPY target1/dsmovie-0.0.1-SNAPSHOT.jar app.jar
+COPY target/dsmovie-0.0.1-SNAPSHOT.jar app.jar
 
 # Expor a porta 8080 (ou a porta configurada no seu Spring Boot)
 EXPOSE 8081
