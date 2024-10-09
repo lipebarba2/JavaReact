@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  dsmovie-app:
+    build: .
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+    networks:
+      - dsmovie-network
+
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: dsmovie
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - dsmovie-network
+
+networks:
+  dsmovie-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
