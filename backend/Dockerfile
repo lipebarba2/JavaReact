@@ -1,14 +1,27 @@
-# Usando uma imagem base oficial do Java para rodar o Spring Boot
-FROM openjdk:17-jdk-alpine
+# Use uma imagem base do Maven com JDK 17 para compilar a aplicação
+FROM maven:3.8.4-openjdk-17 AS build
 
 # Defina o diretório de trabalho dentro do contêiner
-WORKDIR /dsmovie
+WORKDIR /app
 
-# Copie o arquivo JAR do projeto gerado pelo Maven/Gradle para o contêiner
-COPY target/dsmovie-0.0.1-SNAPSHOT.jar app.jar
+# Copie o arquivo pom.xml e as dependências do projeto
+COPY pom.xml .
+COPY src ./src
 
-# Expor a porta 8080 (ou a porta configurada no seu Spring Boot)
+# Compile o projeto e crie um jar
+RUN mvn clean package
+
+# Use uma imagem mais leve com JDK 17 para rodar a aplicação
+FROM openjdk:17-jdk-slim
+
+# Defina o diretório de trabalho dentro do contêiner
+WORKDIR /app
+
+# Copie o jar do estágio de construção anterior
+COPY --from=build /app/target/dsmovie-0.0.1-SNAPSHOT.jar /app/dsmovie.jar
+
+# Exponha a porta que a aplicação irá rodar
 EXPOSE 8081
 
 # Comando para rodar a aplicação
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "dsmovie.jar"]
