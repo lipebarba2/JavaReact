@@ -1,1 +1,1 @@
-export const BASE_URL = "https://dsmovie4-asgbuyvl.b4a.run"
+export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? "http://localhost:8081";
