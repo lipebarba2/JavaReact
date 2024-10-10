@@ -23,7 +23,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Desabilitar frameOptions de acordo com os novos métodos no Spring Security 6.1+
+        // Desabilitar frameOptions de acordo com os novos métodos  Spring Security 6.1+
         if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
             http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
         }
